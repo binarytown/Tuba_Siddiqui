@@ -1,0 +1,87 @@
+---
+title: "The Greatest of Time: The Beatles"
+author: "Tuba Siddiqui"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+#read the data files
+setwd("/Users/tuba/Desktop/Spring 2025/Stat 228 - Intro to Data Science/mini_project/archive")
+beatles_cleansed <- read.csv("TheBeatlesCleaned.csv")
+beatles_early <- read.csv("TheBeatlesEarlyYears.csv")
+beatles_global <- read.csv("TheBeatlesGlobalYears.csv")
+beatles_songs <- read.csv("TheBeatlesSongs.csv")
+beatles_raw <- read.csv("TheBeatlesRaw.csv")
+```
+
+```{r}
+#summarize the dataset
+summary(beatles_cleansed[, c("danceability" , "energy", "speechiness", "acousticness","liveness", "valence", "duration_ms")])
+```
+##Introduction 
+The Beatles are one of the most influential musical bands in music history. Their music and discography has been one of the finest in the history of humanity. Today, we will be exploring audio features of their songs on Spotify, such as tempo, danceability, and valence, to uncover patterns and trends in their music. Using data from The Beatles Spotify Song Data collected by Chad Wambles, we will visualize the relationships between different musical features and explore how these features evolve over time.
+![The Beatles - Abbey Road (1969)](/Users/tuba/Downloads/THE BEATLES - Abbey Road (1969).jpg)
+
+
+
+##Analysis
+The dataset includes various audio features from The Beatles' discography, including danceability, energy, speechiness, and more. Here are some key insights based on the summary statistics:
+
+Danceability: Ranges from 0.146 to 0.880, with a mean of 0.519, suggesting that most Beatles songs have moderate danceability.
+
+Energy: Highly variable, with some songs being very energetic and others more relaxed.
+
+Speechiness: Remains low overall, indicating that most Beatles songs are more musical than spoken.
+
+Acousticness and Valence: Show a wide spread, suggesting diverse musical styles and emotional tones in their music.
+
+Duration: Varies significantly, with the longest song lasting over 8 minutes.
+
+These features help us understand and give insight into the key contents behind The Beatles great discography and musical talent. 
+
+
+
+
+##The Joy of The Beatles Music
+Now we will be looking into the scatter plot that shows the relationship between danceability and energy of Beatles songs across different albums. It suggests that songs with higher danceability tend to also have higher energy, which is common for tracks with upbeat musical waves.
+
+```{r}
+ggplot(beatles_cleansed, aes(x = danceability, y = energy, color = album)) + 
+  geom_point(size = 4, alpha = 0.7) +
+  labs(title = "Danceability vs Energy in Beatles Songs",
+  x = "Danceability",
+  y = "Energy",
+  color = "Album") +
+  theme_classic()
+```
+
+
+
+##The Use of Valence(Upbeat tone)
+The plot below shows us how positivity (valence) is distributed in Beatles songs. The density of most songs leans towards the positive side, indicating that the majority of Beatles songs have a happy or upbeat tone, though a few songs are more melancholic.
+```{r}
+ggplot(beatles_cleansed, aes(x = valence, fill = album)) +
+  geom_density(alpha = 0.8) +
+  labs(title = "Distribution of Valence in Beatles Songs",
+       x = "Valence",
+       y = "Density",
+       fill = "Album") +
+  theme_classic()
+
+```
+
+
+
+
+##Thoughts
+One thing which makes the muscial dynamics of The Beatles extraordinary is how they use broad range of danceability and energy levels. Generally, songs with higher danceability tend to be more energetic, reflecting the upbeat and rhythmic nature of many of their tracks. The distribution of upbeat tones or valence reflects that while most of their songs have a positive tone, there are still some tracks with more melancholic or introspective emotions which just adds more magic to their outworldy albums. These findings suggest that the Beatles' music encompasses a wide range of emotional and rhythmic styles, creating a diverse range of listeners across different moods.
+
+
+

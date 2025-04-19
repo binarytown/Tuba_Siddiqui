@@ -1,39 +1,57 @@
-# my_portfolio
+# 💖 my_portfolio
 
-Hi, I’m Tuba Siddiqui
-![IMG_6394](https://github.com/user-attachments/assets/c50d4302-cd06-46b1-9e91-f47baaf3433d)
-I’m passionate about exploring technological tools and leveraging them to create real-world solutions for environmental and human-centered challenges.
-I’m currently learning Magine Learning, AI-driver data analysis and Web Development.
-I’m looking to collaborate on innovative solutions for enivronment-based catasrophes, creative applications of machine-based resources, and community driven tech initiatives.
-How to reach me: tubaashmeera@gmail.com or linkedin.com/in/-tubasiddiqui
-Pronouns: She/Her
+**Hi, I’m Tuba Siddiqui**  
+> Pronouns: She/Her
 
+![Tuba Siddiqui](https://github.com/user-attachments/assets/c50d4302-cd06-46b1-9e91-f47baaf3433d)
 
-#About Me
+I’m passionate about exploring technological tools and leveraging them to create real-world solutions for environmental and human-centered challenges.  
+I’m currently learning **Machine Learning**, **AI-driven data analysis**, and **Web Development**.  
+I’m looking to collaborate on innovative solutions for **environment-based catastrophes**, **creative applications of machine-based resources**, and **community-driven tech initiatives**.
 
-My educational qualifications are as followed:
+---
 
-High School: City Montessori School, Lucknow, UP, India
-Undergraduate: Simmons University, Boston, MA, USA
+## 📬 How to Reach Me
 
-Awards and Honors:
+- 📧 tubaashmeera@gmail.com  
+- 🔗 [LinkedIn](https://www.linkedin.com/in/-tubasiddiqui)  
+- 📱 (857) 423-5753  
 
-￲Certificate of participation in 19th Conference of Chief Justice of the world
-Level: School
-￲Certificate of participation in Pre-National Mathematics Open Test
-Level: State/Regional
-Certificate of participation in Discovery School Super League Season II 2019-20
-Level: State/Regional
-Certificate of Recognition in Kenken International Championship 2019-India Edition
-Level: National
+---
 
-Currently I am a member of Simmons University's Model United Nation's Club and a mentor at Simmons University's Strong Women Strong Girls chapter. I also love volunteering at Non-Profit Organisations like Rosie's Place. 
+## 👩‍🎓 About Me
 
-#Contact Information
+### 🎓 Education
 
-Email: tubaashmeera@gmail.com
-Contact: (857) 423-5753
+**Simmons University**, Boston, MA  
+*Undergraduate | Sep 2023 – May 2027*  
+**Major:** Computer Science  
+**Minors:** Mathematics, Data Science, Biostatistics  
+**Activities:** Strong Women Strong Girls, Simmons Model United Nations, Asian Students Association  
 
+**City Montessori School**, Lucknow, India  
+*High School Junior & Senior Year | Aug 2021 – May 2023*  
+**Activities:** CMS MUN, CMS Arts Club, STEM Club for Inventors  
 
+**City Montessori Inter College**, Lucknow, India  
+*High School Freshman & Sophomore Year | Mar 2011 – Sep 2021*  
+**Activities:** Swimming Club, Assembly Choir, Creative Thinker’s Club  
 
+---
+
+## 💻 Skills
+
+- **Computer Tools:** Microsoft Office Suite, BlueJ, Visual Studio Code, Jupyter Notebook, GitHub  
+- **Hardware:** Desktops, Printers, 3D Printers  
+- **Languages:** Java, Python, C++, HTML, R  
+
+---
+
+## 📄 Resume
+
+[📄 View My Resume (PDF)](TubaS_Resume.pdf)
+
+---
+
+> 🌸 *Currently, I am a member of Simmons University's Model United Nations Club and a mentor at Simmons University's Strong Women Strong Girls chapter. I also love volunteering at non-profit organizations like Rosie's Place.*
 

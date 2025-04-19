@@ -1,9 +1,9 @@
-# 💖 my_portfolio
+# Tuba Siddiqui
 
-**Hi, I’m Tuba Siddiqui**  
+**Hi, I’m Tuba!**  
 > Pronouns: She/Her
 
-![Tuba Siddiqui](https://github.com/user-attachments/assets/c50d4302-cd06-46b1-9e91-f47baaf3433d)
+![Tuba Siddiqui](CB4E336E-863A-4404-BA9C-5E28853736AF_1_105_c.jpeg)
 
 I’m passionate about exploring technological tools and leveraging them to create real-world solutions for environmental and human-centered challenges.  
 I’m currently learning **Machine Learning**, **AI-driven data analysis**, and **Web Development**.  
@@ -55,3 +55,15 @@ I’m looking to collaborate on innovative solutions for **environment-based cat
 
 > 🌸 *Currently, I am a member of Simmons University's Model United Nations Club and a mentor at Simmons University's Strong Women Strong Girls chapter. I also love volunteering at non-profit organizations like Rosie's Place.*
 
+
+## 🚀 Projects
+🎵 The Beatles & Data Visualization — STAT228 Mini-Project
+Date: March 2025
+Analyzed The Beatles’ music using R and ggplot2 to explore patterns in danceability, energy, and mood across albums.
+
+- Created clean, easy-to-read plots  
+- Wrote a blog-style report in R Markdown  
+- Focused on clear visuals and simple storytelling with data  
+
+🔗 [View Blog Post (HTML)](https://binarytown.github.io/my_portfolio/The-Beatles.html)  
+📁 Project for Intro to Data Science, Simmons University

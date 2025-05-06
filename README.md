@@ -76,7 +76,6 @@ Explored Oscar nomination and win patterns from 1927 to 2025. Built a decision t
 - Created visualizations of nomination patterns and wins  
 - Built and visualized a decision tree using rpart  
 - Evaluated model performance using accuracy and ROC/AUC  
-- Reflected on data limitations and proposed future improvements
 
-🔗 [View Blog Post (HTML)](https://github.com/binarytown/my_portfolio/blob/main/The-Oscars.html)  
+🔗 [View Blog Post (HTML)](https://github.com/binarytown/my_portfolio/The-Oscars.html)  
 📁 Final project for Intro to Data Science, Simmons University

@@ -78,5 +78,5 @@ Explored Oscar nomination and win patterns from 1927 to 2025. Built a decision t
 - Evaluated model performance using accuracy and ROC/AUC  
 - Reflected on data limitations and proposed future improvements
 
-🔗 [View Blog Post (HTML)]()  
+🔗 [View Blog Post (HTML)](https://github.com/binarytown/my_portfolio/blob/main/The-Oscars.html)  
 📁 Final project for Intro to Data Science, Simmons University

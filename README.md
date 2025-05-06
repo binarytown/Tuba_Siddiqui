@@ -67,3 +67,16 @@ Analyzed The Beatles’ music using R and ggplot2 to explore patterns in danceab
 
 🔗 [View Blog Post (HTML)](https://binarytown.github.io/my_portfolio/The-Beatles.html)  
 📁 Project for Intro to Data Science, Simmons University
+
+🏆 And the Oscar Goes To.... A Sneak Peak at the Most Awarded Films in The Academy — STAT228 Final Project  
+Date: May 2025  
+Explored Oscar nomination and win patterns from 1927 to 2025. Built a decision tree model to predict whether films receive 5 or more nominations based on their category and ceremony year.
+
+- Cleaned and prepared data using tidyverse  
+- Created visualizations of nomination patterns and wins  
+- Built and visualized a decision tree using rpart  
+- Evaluated model performance using accuracy and ROC/AUC  
+- Reflected on data limitations and proposed future improvements
+
+🔗 [View Blog Post (HTML)]()  
+📁 Final project for Intro to Data Science, Simmons University

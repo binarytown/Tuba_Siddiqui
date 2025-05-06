@@ -1,0 +1,250 @@
+---
+title: "And the Oscar Goes To.... A Sneak Peak at the Most Awarded Films in The Academy"
+author: "Tuba Siddiqui"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, warning = FALSE,  message = FALSE}
+library(tidyverse)
+library(readr)
+library(caret) #package for training, tuning, and evaluating machine learning models
+library(rpart) #package for creating classification and regression trees
+library(pROC)
+library(rpart.plot) #package for plotting classification and regression trees
+```
+
+# Introduction
+
+The Film Industry has been a huge part of our lives, we've lived through generations of cinematic art and experienced the wonders of Cinema in real time. Through this project, I want to uncover which actors, actresses, producers, and films have been the most beloved in the Academy Awards from 1927 to 2025.
+
+I will explore how many nominations winning films typically receive, how many translate into wins, and whether we can predict whether a film will get multiple nominations based on its category and year.
+
+Dataset: [Academy Awards, 1927-2025 - Kaggle](https://www.kaggle.com/datasets/unanimad/the-oscar-award)
+
+**Model Architecture**
+For predicting the win of a nominee, I will create a Classification Tree using the `rpart` package. I believe this method is appropriate because:
+- It will handle  our categorical predictors well (category and ceremony year).
+- Our results will be easy to interpret and visualize.
+- It will highlight which features are most important in predicting an Oscar win.
+
+I will evaluate the model’s performance using ROC curves and accuracy metrics.
+
+
+```{r}
+#load our data
+oscars <- read_delim("the_oscar_award.csv", delim = ",")
+full_data <- read_delim("full_data.csv", delim = "\t")
+
+#let's take a peek at the first few rows
+head(oscars)
+head(full_data)
+
+#view the structure
+glimpse(oscars)
+glimpse(full_data)
+```
+
+```{r}
+#look at column names
+colnames(oscars)
+```
+
+
+```{r}
+#look at column names
+colnames(full_data)
+```
+
+## Loading and Preparing the Data
+
+```{r}
+#filtering out our dataset to only include the colmns we need
+film_data <- full_data |>
+  select(Ceremony, Year, Category, Film, Winner, Nominees) |>
+  filter(!is.na(Category), !is.na(Ceremony), !is.na(Year), !is.na(Winner), !is.na(Nominees), !is.na(Film))
+
+#count nominations & wins by film
+film_nominations <- film_data |>
+  group_by(Film) |>
+  summarise(total_nominations = n())
+
+film_wins <- film_data |>
+  filter(Winner == TRUE) |>
+  group_by(Film) |>
+  summarise(total_wins = n())
+
+#to combine nominations and wins to calculate win rate
+film_data <- film_data |>
+  group_by(Film) |>
+  mutate(total_nominations = n(),
+         high_noms = ifelse(total_nominations >= 5, "Yes", "No")) |>
+  ungroup()
+
+#to convert high_noms to facttor
+film_data$high_noms <- factor(film_data$high_noms)
+table(film_data$high_noms)
+```
+
+**Nominations & Wins**
+
+```{r}
+#to count nominations & wins 
+film_nominations <- film_data |>
+  group_by(Film) |>
+  summarise(total_nominations = n())
+
+film_wins <- film_data |>
+  filter(Winner == TRUE) |>
+  group_by(Film) |>
+  summarise(total_wins = n())
+
+film_summary <- film_nominations |>
+  left_join(film_wins, by = "Film") |>
+  mutate(total_wins = replace_na(total_wins, 0), win_rate = total_wins / total_nominations)
+
+#to take a quick look at our data
+head(film_summary)
+```
+
+
+**Top 10 Nominated Films**
+
+```{r}
+top_films <- film_summary |>
+  arrange(desc(total_nominations)) |>
+  slice(1:10)
+
+#ggplot to visualize the top 10 films
+ggplot(top_films, aes(x = reorder(Film, total_nominations), y = total_nominations)) +
+  geom_bar(stat = "identity", fill = "darkblue") +
+  coord_flip() +
+  labs(title = "Top 10 most nominated films",
+       x = "Film",
+       y = "Total Nominations")
+  theme_minimal()
+```
+
+```{r}
+#ggplot to visualise nomination vs wins
+ggplot(film_summary, aes(x = total_nominations, y = total_wins)) +
+  geom_point(alpha = 0.8, color = "darkgreen") +
+  geom_smooth(method = "lm", se = FALSE, color = "pink") +
+  labs(title = "Nominations vs. Wins in Films",
+       x = "Total Nominations",
+       y = "Total Wins")
+  theme_minimal()
+```
+
+
+
+**Model Training**
+
+```{r}
+#to convert to factor
+film_data$high_noms <- factor(film_data$high_noms)
+table(film_data$high_noms)
+```
+
+
+```{r}
+#to add broader category_group to simplify categories
+film_data <- film_data |>
+  mutate(category_group = case_when(
+    str_detect(Category, "PICTURE|PRODUCTION") ~ "Picture/Production",
+    str_detect(Category, "ACTOR|ACTRESS|ACTING") ~ "Acting",
+    str_detect(Category, "DIRECTING") ~ "Directing",
+    str_detect(Category, "WRITING") ~ "Writing",
+    str_detect(Category, "MUSIC|SOUND") ~ "Music/Sound",
+    str_detect(Category, "EDITING") ~ "Editing",
+    TRUE ~ "Other"
+  ))
+
+#to check the new groups
+table(film_data$category_group)
+```
+
+
+**Classification Tree**
+```{r}
+#to ensure reproducibility
+set.seed(248402)
+#we have to split our training data by 75% & our testing data by 25%
+train_index <- createDataPartition(film_data$high_noms, p = 0.75, list = FALSE)
+train_data <- film_data[train_index, ]
+test_data <- film_data[-train_index, ]
+
+# Train the tree
+tree_oscars <- rpart(
+  high_noms ~ category_group + Ceremony,
+  data = train_data,
+  method = "class",
+  control = rpart.control(cp = 0.005, minsplit = 10)
+)
+
+#to plot
+rpart.plot(tree_oscars)
+```
+
+**Decision Tree Summary**
+
+Our classification tree model predicts whether a film receives high nominations which is 5 or more nominations based on the Ceremony Year and Category of the Oscar award. 
+
+**Prediction**
+
+```{r}
+#to make predictions on the test data
+pred_oscars <- predict(tree_oscars, newdata = test_data, type = "prob")[,2]
+
+#to convert probab to binary outcomes
+pred_binary <- ifelse(pred_oscars > 0.5, 1, 0)
+
+#to ensure the correct binary outcome for comparison in the test data
+oscars_binary <- ifelse(test_data$high_noms == "Yes", 1, 0)
+
+#to compare predicted values with actual values
+accuracy <- mean(pred_binary == oscars_binary)
+accuracy
+
+```
+
+**So the model accuracy is approximately 79%, which is moderate, not too good or too bad for our model.**
+
+```{r}
+#to make sure category_group levels match in test data
+test_data$category_group <- factor(test_data$category_group, levels = levels(train_data$category_group))
+
+#to get predicted prob for Yes
+pred_probs <- predict(tree_oscars, newdata = test_data, type = "prob")[,2]  # Probabilities of "Yes"
+
+#lets create binary acutal outcomws
+oscars_actuals <- ifelse(test_data$high_noms == "Yes", 1, 0)
+
+#ROC Curve & AUC
+roc_curve <- roc(oscars_actuals, pred_probs)
+auc_value <- auc(roc_curve)
+
+#to plot ROC curve
+plot(roc_curve, col = "darkgreen", main = "ROC Curve for Oscar Nomination Prediction")
+abline(a = 0, b = 1, lty = 2, col = "darkblue") 
+
+#lets print AUC value
+auc_value
+```
+## Conclusion
+In this project, I explored Oscar nomination and win patterns from 1927 to 2025. I built a decision tree to predict if a film would get 5 or more nominations based on its award category and the year.
+
+Throughout the process, I got to learn that our tree provides some useful insights into how categories and ceremony years relate to nomination patterns. Our model’s accuracy showed it could make reasonable predictions on the test data. However, the ROC curve and AUC showed that the model didn’t perform much better than random guessing. This suggests us that other factors like box office performance & budget, film reviews, or film industry trends are important and were missing from this data.
+
+For future work, adding more film related data and trying different models, like logistic regression, might improve our desired predictions.
+
+## References 
+Dataset: [Academy Awards, 1927-2025 - Kaggle](https://www.kaggle.com/datasets/unanimad/the-oscar-award)
+R Packages: tidyverse, caret, rpart, pROC.
+
+
+
+
+

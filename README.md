@@ -49,7 +49,7 @@ I’m looking to collaborate on innovative solutions for **environment-based cat
 
 ## 📄 Resume
 
-[📄 View My Resume (PDF)](https://github.com/binarytown/my_portfolio/blob/main/TubaS_Resume.pdf)
+[📄 View My Resume (PDF)](https://github.com/binarytown/Tuba_Siddiqui/blob/main/TubaSiddiqui_Resume.pdf) 
 
 ---
 
